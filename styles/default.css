@@ -1,0 +1,39 @@
+html {
+  position: relative;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #F2F0F9;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #6E6893;
+  text-transform: uppercase;
+}
+
+button {
+  padding: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+h1,
+p,
+fieldset {
+  margin: 0;
+}
+
+input,
+textarea {
+  outline: none;
+}

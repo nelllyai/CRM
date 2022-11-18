@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>CRM</title>
+  <meta charset="utf-8">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/style.css">
+
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <article class="form-article">
+    <div class="container form-article__container">
+      <button class="close-button form-article__close-button"></button>
+      <h1 class="form-article__title">Добавить товар</h1>
+
+      <form class="add-form" action="https://jsonplaceholder.typicode.com/posts" method="post">
+        <fieldset class="add-form__fieldset">
+          <div class="add-form__field">
+            <label class="add-form__name" for="name">Наименование</label>
+            <input class="add-form__input" type="text" name="name" id="name">
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="category">Категория</label>
+            <input class="add-form__input" type="text" name="category" id="category">
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="units">Единицы измерения</label>
+            <input class="add-form__input" type="text" name="units" id="units">
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="discountAmount">Дисконт</label>
+            <div class="checkbox">
+              <input class="add-form__checkbox" type="checkbox" name="discount" id="discount" value="checked">
+              <input class="add-form__input" type="text" name="discountAmount" id="discountAmount" disabled>
+            </div>
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="description">Описание</label>
+            <textarea class="add-form__textarea" name="description" id="description"></textarea>
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="count">Количество</label>
+            <input class="add-form__input" type="number" name="count" id="count">
+          </div>
+
+          <div class="add-form__field">
+            <label class="add-form__name" for="price">Цена</label>
+            <input class="add-form__input" type="number" name="price" id="price">
+          </div>
+        </fieldset>
+        <button class="add-form__submit" type="submit">Добавить товар</button>
+      </form>
+    </div>
+  </article>
+</body>
+
+</html>
