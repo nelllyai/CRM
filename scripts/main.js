@@ -1,5 +1,3 @@
-console.log('%cmain.js', 'color: pink');
-
 const product = prompt("Введите наименование товара:");
 const quantity = +prompt("Введите количество:");
 const category = prompt("Укажите категорию товара:");
