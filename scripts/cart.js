@@ -18,15 +18,10 @@ const cart = {
     this.count += num;
   },
   calculateItemPrice() {
-    let resultPrice = 0;
-    for (item of this.items) {
-      resultPrice += item.price * item.quantity;
-    }
-    return resultPrice;
+    return this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   },
   clear() {
     this.items.length = 0;
-    this.totalPrice = 0;
     this.count = 0;
   },
   print() {
