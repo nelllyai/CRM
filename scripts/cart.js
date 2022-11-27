@@ -1,3 +1,5 @@
+'use strict';
+
 const cart = {
   items: [],
   count: 0,
@@ -8,7 +10,7 @@ const cart = {
     const newItem = {
       item,
       price,
-      quantity
+      quantity,
     };
 
     this.items.push(newItem);
@@ -18,7 +20,8 @@ const cart = {
     this.count += num;
   },
   calculateItemPrice() {
-    return this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    return this.items.reduce((sum, item) =>
+      sum + item.price * item.quantity, 0);
   },
   clear() {
     this.items.length = 0;
@@ -27,11 +30,11 @@ const cart = {
   print() {
     console.log(JSON.stringify(this.items));
     console.log(this.totalPrice);
-  }
+  },
 };
 
-cart.add("Ароматические свечи", 800, 5);
-cart.add("Крем для рук", 230, 2);
-cart.add("Масло для волос", 400);
+cart.add('Ароматические свечи', 800, 5);
+cart.add('Крем для рук', 230, 2);
+cart.add('Масло для волос', 400);
 
 cart.print();

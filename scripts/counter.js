@@ -1,3 +1,5 @@
+'use strict';
+
 const count = arr => {
   return new Set(arr).size;
 }
