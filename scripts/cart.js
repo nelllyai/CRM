@@ -36,9 +36,9 @@ const cart = {
   },
   set setDiscount(promocode) {
     if (promocode === 'METHED') {
-      this.discount = 15;
+      this.discount += 15;
     } else if (promocode === 'NEWYEAR') {
-      this.discount = 21;
+      this.discount += 21;
     }
   },
 };
