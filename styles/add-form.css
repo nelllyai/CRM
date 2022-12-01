@@ -1,36 +1,68 @@
 .add-form__fieldset {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr) 8px 39px;
+  gap: 12px 24px;
   padding: 28px;
   margin-bottom: 32px;
   background-color: #fff;
-  border: none;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 }
 
-.add-form__field {
-  margin-bottom: 12px;
+.add-form__field_product {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
 }
 
-.add-form__label:last-child {
-  margin-bottom: 0;
+.add-form__field_category {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
 }
 
-.add-form__name {
+.add-form__field_units {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.add-form__field_discount {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+}
+
+.add-form__field_description {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+.add-form__field_quantity {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.add-form__field_price {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+}
+
+.add-form__field_img {
+  grid-column: 2 / 3;
+  grid-row: 6 / 7;
+}
+
+.add-form__label {
+  display: block;
   padding-left: 9px;
   margin-bottom: 5px;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .add-form__input {
-  margin-top: 5px;
   padding: 10px;
   height: 40px;
   width: 100%;
   background-color: #F4F2FF;
-  border: none;
   border-radius: 6px;
 }
 
@@ -39,7 +71,6 @@
 }
 
 .add-form__checkbox {
-  margin-top: 5px;
   position: absolute;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -81,11 +112,11 @@
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
-.add-form__checkbox:not(checked) + .add-form__input {
+.add-form__checkbox:not(checked)+.add-form__input {
   background-color: #EEEEEE;
 }
 
-.add-form__checkbox:checked + .add-form__input {
+.add-form__checkbox:checked+.add-form__input {
   background-color: #F4F2FF;
 }
 
@@ -94,24 +125,32 @@
   width: 100%;
   height: 112px;
   background-color: #F4F2FF;
-  border: none;
-  resize: none;
+  border-radius: 6px;
 }
 
 .add-form__textarea:focus {
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
-.add-form__submit {
-  padding: 10px 25px;
-  margin-left: 352px;
-  width: 200px;
-  height: 39px;
-  background-color: #6D5BD0;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  text-transform: uppercase;
+.add-form__button-label {
+  display: block;
+}
+
+.add-form__final {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 29px;
+}
+
+.add-form__total {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.add-form__total_price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #6D5BD0;
 }

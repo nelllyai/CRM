@@ -18,13 +18,12 @@ body {
   font-size: 12px;
   line-height: 15px;
   color: #6E6893;
-  text-transform: uppercase;
 }
 
 button {
   padding: 0;
   color: #fff;
-  cursor: pointer;
+  border: none;
 }
 
 h1,
@@ -33,7 +32,24 @@ fieldset {
   margin: 0;
 }
 
+fieldset {
+  border: none;
+}
+
 input,
 textarea {
+  border: none;
   outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type="file"] {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  height: 0;
+  width: 0;
 }

@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles/style.css">
 
@@ -20,47 +20,61 @@
       <button class="close-button form-article__close-button"></button>
       <h1 class="form-article__title">Добавить товар</h1>
 
+      <hr class="form-article__hr">
+
       <form class="add-form" action="https://jsonplaceholder.typicode.com/posts" method="post">
         <fieldset class="add-form__fieldset">
-          <div class="add-form__field">
-            <label class="add-form__name" for="name">Наименование</label>
-            <input class="add-form__input" type="text" name="name" id="name">
+          <div class="add-form__field add-form__field_product">
+            <label class="add-form__label" for="name">Наименование</label>
+            <input class="add-form__input" type="text" name="product" id="name">
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="category">Категория</label>
+          <div class="add-form__field add-form__field_category">
+            <label class="add-form__label" for="category">Категория</label>
             <input class="add-form__input" type="text" name="category" id="category">
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="units">Единицы измерения</label>
+          <div class="add-form__field add-form__field_units">
+            <label class="add-form__label" for="units">Единицы измерения</label>
             <input class="add-form__input" type="text" name="units" id="units">
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="discountAmount">Дисконт</label>
+          <div class="add-form__field add-form__field_discount">
+            <label class="add-form__label" for="discountAmount">Дисконт</label>
             <div class="checkbox">
               <input class="add-form__checkbox" type="checkbox" name="discount" id="discount" value="checked">
               <input class="add-form__input" type="text" name="discountAmount" id="discountAmount" disabled>
             </div>
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="description">Описание</label>
+          <div class="add-form__field add-form__field_description">
+            <label class="add-form__label" for="description">Описание</label>
             <textarea class="add-form__textarea" name="description" id="description"></textarea>
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="count">Количество</label>
-            <input class="add-form__input" type="number" name="count" id="count">
+          <div class="add-form__field add-form__field_quantity">
+            <label class="add-form__label" for="quantity">Количество</label>
+            <input class="add-form__input" type="number" name="quantity" id="quantity">
           </div>
 
-          <div class="add-form__field">
-            <label class="add-form__name" for="price">Цена</label>
+          <div class="add-form__field add-form__field_price">
+            <label class="add-form__label" for="price">Цена</label>
             <input class="add-form__input" type="number" name="price" id="price">
           </div>
+
+          <div class="add-form__field add-form__field_img">
+            <label class="add-form__button-label button button_small" for="img">Добавить изображение</label>
+            <input class="add-form__file" type="file" name="img" accept=".jpg, .jpeg, .png" id="img">
+            </label>
+          </div>
         </fieldset>
-        <button class="add-form__submit" type="submit">Добавить товар</button>
+
+        <div class="add-form__final">
+          <div class="add-form__total">
+            Итоговая стоимость: <span class="add-form__total_price">$ 900.00</span>
+          </div>
+          <button class="button" type="submit">Добавить товар</button>
+        </div>
       </form>
     </div>
   </article>
