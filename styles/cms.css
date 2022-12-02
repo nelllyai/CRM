@@ -14,16 +14,13 @@
 }
 
 .cms__group {
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  background-color: white;
-}
-
-.cms__fieldset {
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 15px 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: white;
 }
 
 .cms__filter-button {
@@ -138,7 +135,7 @@
     padding: 60px 0;
   }
 
-  .cms__fieldset {
+  .cms__group {
     flex-direction: column;
   }
 
