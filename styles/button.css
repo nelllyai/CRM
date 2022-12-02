@@ -1,12 +1,13 @@
 .button {
   padding: 10px 25px;
-  background-color: #6D5BD0;
+  background-color: var(--dark-color);
   border-radius: 6px;
   font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  color: #fff;
+  color: white;
   text-transform: uppercase;
+  text-align: center;
   cursor: pointer;
 }
 

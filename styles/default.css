@@ -10,20 +10,22 @@ html {
 }
 
 body {
-  background-color: #F2F0F9;
+  background-color: var(--background);
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 12px;
   line-height: 15px;
-  color: #6E6893;
+  color: var(--text-color);
 }
 
 button {
   padding: 0;
-  color: #fff;
+  color: white;
   border: none;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 h1,
@@ -52,4 +54,10 @@ input[type="file"] {
   position: absolute;
   height: 0;
   width: 0;
+}
+
+select {
+  border: none;
+  background-color: inherit;
+  color: inherit
 }

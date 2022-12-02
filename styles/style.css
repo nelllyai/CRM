@@ -1,8 +1,14 @@
 @import "normalize.css";
 @import "default.css";
+@import "var.css";
 @import "container.css";
+@import "title.css";
+@import "hr.css";
+@import "cms.css";
+@import "overlay.css";
 @import "form-article.css";
 @import "close-button.css";
 @import "add-form.css";
 @import "checkbox.css";
 @import "button.css";
+@import "total.css";
