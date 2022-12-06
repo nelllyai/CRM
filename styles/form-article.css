@@ -4,6 +4,23 @@
   max-width: 780px;
 }
 
+.form-article__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .form-article__title {
   margin-bottom: 20px;
+}
+
+.form-article__id {
+  color: #C5C5C5;
+  text-transform: uppercase;
+}
+
+@media (max-width: 788px) {
+  .form-article__header {
+    flex-direction: column;
+  }
 }
