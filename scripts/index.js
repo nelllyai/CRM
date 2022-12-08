@@ -11,7 +11,7 @@ const form = modal.querySelector('form');
 
 const discountCheckbox = modal.querySelector('.add-form__checkbox');
 const discountInput = modal
-  .querySelector('.add-form__checkbox ~ .add-form__input');
+    .querySelector('.add-form__checkbox ~ .add-form__input');
 
 const totalPrice = modal.querySelector('.total__price');
 
@@ -25,19 +25,12 @@ const createRow = obj => {
   }
 
   return tr;
-}
+};
 
-const renderGoods = arr => {
-  const table = document.createElement('table');
-  const tbody = document.createElement('tbody');
-  table.append(tbody);
-
-  for (const elem of arr) {
-    tbody.append(createRow(elem));
-  }
-
-  return table;
-}
+const renderGoods = (elem, goods) => {
+  const allRow = goods.map(createRow);
+  elem.append(...allRow);
+};
 
 const goods = [
   {
@@ -98,4 +91,7 @@ const goods = [
   }
 ];
 
-console.log(renderGoods(goods));
+const table = document.createElement('table');
+const tbody = document.createElement('tbody');
+table.append(tbody);
+renderGoods(tbody, goods);
