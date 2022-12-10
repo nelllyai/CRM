@@ -11,7 +11,7 @@ const form = document.querySelector('.form-article');
 
 const discountCheckbox = modal.querySelector('.add-form__checkbox');
 const discountInput = modal
-  .querySelector('.add-form__checkbox ~ .add-form__input');
+    .querySelector('.add-form__checkbox ~ .add-form__input');
 
 const totalPrice = modal.querySelector('.total__price');
 
@@ -44,6 +44,14 @@ overlay.addEventListener('click', event => {
   if (target === overlay || target === closeButton) {
     overlay.classList.remove('overlay_show');
   }
-})
+});
 
+const table = document.querySelector('.cms__table');
 
+table.addEventListener('click', event => {
+  const target = event.target;
+
+  if (target.closest('.table-button_delete')) {
+    target.closest('tr').remove();
+  }
+});
