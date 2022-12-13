@@ -6,118 +6,141 @@ const goods = [
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 937295527,
     product: 'Настольная игра “На 4-х ногах”',
     category: 'Настольные игры',
     units: 'шт',
+    description: 'Описание...',
     quantity: 12,
-    cost: '$14',
-    total: '$168',
+    cost: 14,
+    img: 'img',
   },
   {
     id: 246016547,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016546,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016545,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016544,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016543,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016542,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016541,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
   {
     id: 246016540,
     product: 'Навигационная система Soundmax',
     category: 'Техника для дома',
     units: 'шт',
+    description: 'Описание...',
     quantity: 5,
-    cost: '$100',
-    total: '$500',
+    cost: 100,
+    img: 'img',
   },
 ];
 
 const modal = document.querySelector('.form-article');
 
-const title = modal.querySelector('h2');
-
 const closeButton = modal.querySelector('.overlay__close-button');
-const productId = modal.querySelector('.form-article__id');
 
-const form = document.querySelector('.form-article');
+const form = document.querySelector('.add-form');
 
 const discountCheckbox = modal.querySelector('.add-form__checkbox');
 const discountInput = modal
     .querySelector('.add-form__checkbox ~ .add-form__input');
 
-const totalPrice = modal.querySelector('.total__price');
+const calculateTotalPrice = () => {
+  const totalPrice = document.querySelector('.total__price');
+  const total = goods.reduce((sum, product) =>
+    sum + product.cost * product.quantity, 0);
+  totalPrice.textContent = '$\xA0' + total.toFixed(2);
+};
 
 const createRow = obj => {
   const tr = document.createElement('tr');
   tr.classList.add('cms__tr');
 
-  for (const value of Object.values(obj)) {
-    const td = document.createElement('td');
-    td.classList.add('cms__td');
-    td.textContent = value;
-    tr.append(td);
+  for (const [key, value] of Object.entries(obj)) {
+    if (key !== 'description' && key !== 'img') {
+      const td = document.createElement('td');
+      td.classList.add('cms__td');
+      if (key === 'cost') {
+        td.textContent = '$' + value;
+      } else {
+        td.textContent = value;
+      }
+      tr.append(td);
+    }
   }
+
+  const totalTd = document.createElement('td');
+  totalTd.classList.add('cms__td');
+  totalTd.textContent = '$' + obj.cost * obj.quantity;
+  tr.append(totalTd);
 
   tr.insertAdjacentHTML(
       'beforeend',
@@ -162,9 +185,10 @@ const createRow = obj => {
           </svg>
         </button>
       </td>
-    `
+    `,
   );
 
+  calculateTotalPrice();
   return tr;
 };
 
@@ -180,10 +204,14 @@ addButton.addEventListener('click', () => {
   overlay.classList.add('overlay_show');
 });
 
+const closeOverlay = () => {
+  overlay.classList.remove('overlay_show');
+};
+
 overlay.addEventListener('click', event => {
   const target = event.target;
   if (target === overlay || target === closeButton) {
-    overlay.classList.remove('overlay_show');
+    closeOverlay();
   }
 });
 
@@ -199,5 +227,43 @@ list.addEventListener('click', event => {
     goods.splice(goods.findIndex(product => product.id === currentId), 1);
     console.log(goods);
     row.remove();
+    calculateTotalPrice();
   }
+});
+
+discountCheckbox.addEventListener('change', () => {
+  discountInput.disabled = !discountInput.disabled;
+
+  if (discountInput.disabled) {
+    discountInput.value = '';
+  }
+});
+
+const addProductData = product => {
+  goods.push(product);
+};
+
+const addProductPage = (product, list) => {
+  list.append(createRow(product));
+};
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  const newId = +modal.querySelector('.form-article__current-id').textContent;
+  const newProduct = Object.assign({id: newId}, Object.fromEntries(formData));
+
+  addProductData(newProduct);
+  addProductPage(newProduct, list);
+
+  form.reset();
+  closeOverlay();
+});
+
+form.addEventListener('change', () => {
+  const totalPrice = modal.querySelector('.total__price');
+  const total = +form.quantity.value * +form.cost.value;
+  totalPrice.textContent = '$\xA0' + total.toFixed(2);
 });
