@@ -21,7 +21,7 @@
       <div class="cms__header">
         <h1 class="title cms__title">CMS</h1>
         <div class="total">
-          Итоговая стоимость: <span class="total__price">$&nbsp;900.00</span>
+          Итоговая стоимость: <span class="total__price"></span>
         </div>
       </div>
 
@@ -95,7 +95,7 @@
       <button class="overlay__close-button"></button>
       <div class="form-article__header">
         <h2 class="title form-article__title">Добавить товар</h2>
-        <p class="form-article__id">id: 201910241</p>
+        <p class="form-article__id">id: <span class="form-article__current-id" contenteditable="true">201910241</span></p>
       </div>
 
       <hr class="hr">
@@ -135,9 +135,9 @@
             <input class="add-form__input" type="number" name="quantity" id="quantity" required>
           </div>
 
-          <div class="add-form__field add-form__field_price">
-            <label class="add-form__label" for="price">Цена</label>
-            <input class="add-form__input" type="number" name="price" id="price" required>
+          <div class="add-form__field add-form__field_cost">
+            <label class="add-form__label" for="cost">Цена</label>
+            <input class="add-form__input" type="number" name="cost" id="cost" required>
           </div>
 
           <div class="add-form__field add-form__field_img">
@@ -148,7 +148,7 @@
 
         <div class="add-form__final">
           <div class="total">
-            Итоговая стоимость: <span class="total__price">$&nbsp;900.00</span>
+            Итоговая стоимость: <span class="total__price">$&nbsp;0.00</span>
           </div>
           <button class="button" type="submit">Добавить товар</button>
         </div>
