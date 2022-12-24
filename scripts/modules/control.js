@@ -1,5 +1,5 @@
-import calculateTotalPrice from "./calculate.js";
-import createRow from "./createElements.js";
+import calculateTotalPrice from './calculate.js';
+import createRow from './createElements.js';
 
 const addProductData = (product, goods) => {
   goods.push(product);
@@ -20,7 +20,7 @@ export const formControl = (form, overlay, list, goods) => {
     const formData = new FormData(event.target);
 
     const newId = +overlay.querySelector('.form-article__current-id').textContent;
-    const newProduct = Object.assign({ id: newId }, Object.fromEntries(formData));
+    const newProduct = Object.assign({id: newId}, Object.fromEntries(formData));
 
     addProductData(newProduct, goods);
     addProductPage(newProduct, list);
@@ -39,13 +39,18 @@ export const formControl = (form, overlay, list, goods) => {
 export const listControl = (list, goods) => {
   list.addEventListener('click', event => {
     const target = event.target;
+    const row = target.closest('tr');
 
     if (target.closest('.table-button_delete')) {
-      const row = target.closest('tr');
       const currentId = +row.querySelector('td').textContent;
       goods.splice(goods.findIndex(product => product.id === currentId), 1);
       row.remove();
       calculateTotalPrice(goods);
+    } else if (target.closest('.cms__td_img') && row.dataset.pic) {
+      const x = screen.width / 2 - 300;
+      const y = screen.height / 2 - 300;
+      const popup = open('about:blank', '', `width=600,height=600,top=${y},left=${x}`);
+      popup.document.body.innerHTML = `<img src="${row.dataset.pic}">`;
     }
   });
 };

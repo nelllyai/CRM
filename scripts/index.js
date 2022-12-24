@@ -1,5 +1,5 @@
-import getElements from "./modules/getElements.js";
-import { formControl, listControl, discountCheckboxControl, addButtonControl, overlayControl } from "./modules/control.js";
+import getElements from './modules/getElements.js';
+import {formControl, listControl, discountCheckboxControl, addButtonControl, overlayControl} from './modules/control.js';
 import renderGoods from './modules/render.js';
 
 const goods = [
@@ -11,7 +11,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 937295527,
@@ -21,7 +21,7 @@ const goods = [
     description: 'Описание...',
     quantity: 12,
     cost: 14,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016547,
@@ -31,7 +31,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016546,
@@ -41,7 +41,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016545,
@@ -51,7 +51,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016544,
@@ -61,7 +61,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016543,
@@ -71,7 +71,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016542,
@@ -81,7 +81,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016541,
@@ -91,7 +91,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
   {
     id: 246016540,
@@ -101,7 +101,7 @@ const goods = [
     description: 'Описание...',
     quantity: 5,
     cost: 100,
-    img: 'img',
+    img: 'https://st16.stpulscen.ru/images/product/440/115/302_big.jpg',
   },
 ];
 
