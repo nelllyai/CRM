@@ -2,19 +2,21 @@ import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
 
-const addProductData = (product, goods) => {
-  goods.push(product);
-};
-
-const addProductPage = (product, list) => {
-  list.append(createRow(product));
-};
-
 const closeOverlay = overlay => {
   overlay.classList.remove('overlay_show');
 };
 
-export const formControl = (form, overlay, list) => {
+const getTotalPrice = () => {
+  fetchRequest('https://shorthaired-veiled-fascinator.glitch.me/api/goods', {
+    method: 'GET',
+    callback(err, goods) {
+      if (err) return;
+      calculateTotalPrice(goods);
+    }
+  });
+};
+
+export const formControl = (form, overlay, error, list) => {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -23,14 +25,24 @@ export const formControl = (form, overlay, list) => {
     fetchRequest('https://shorthaired-veiled-fascinator.glitch.me/api/goods', {
       method: 'POST',
       body: Object.fromEntries(formData),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
       callback(err, product) {
         if (err) {
-          console.error(err);
+          error.classList.add('overlay_show');
+          
+          if (err.toString().includes('Ошибка')) {
+            const errorText = error.querySelector('.error__text');
+            errorText.textContent = err;
+          }
+
           return;
         }
         form.reset();
         closeOverlay(overlay);
         list.append(createRow(product));
+        getTotalPrice();
       },
     });
   });
@@ -48,10 +60,15 @@ export const listControl = list => {
     const row = target.closest('tr');
 
     if (target.closest('.table-button_delete')) {
-      // const currentId = +row.querySelector('td').textContent;
-      // goods.splice(goods.findIndex(product => product.id === currentId), 1);
-      // row.remove();
-      // calculateTotalPrice(goods);
+      const currentId = row.querySelector('td').textContent;
+      fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
+        method: 'DELETE',
+        callback(err) {
+          if (err) return;
+          getTotalPrice();
+        }
+      });
+      row.remove();
     } else if (target.closest('.cms__td_img') && row.dataset.pic) {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
@@ -77,11 +94,12 @@ export const addButtonControl = (addButton, overlay) => {
   });
 };
 
-export const overlayControl = (overlay, closeButton) => {
-  overlay.addEventListener('click', event => {
-    const target = event.target;
-    if (target === overlay || target === closeButton) {
-      closeOverlay(overlay);
-    }
-  });
+export const overlayControl = (overlays, closeButton) => {
+  for (let i = 0; i < overlays.length; i++) {
+    overlays[i].addEventListener('click', ({ target }) => {
+      if (target === overlays[i] || target === closeButton[i]) {
+        closeOverlay(overlays[i]);
+      }
+    });
+  }
 };

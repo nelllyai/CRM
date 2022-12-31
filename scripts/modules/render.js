@@ -6,10 +6,7 @@ const renderGoods = elem => {
   fetchRequest('https://shorthaired-veiled-fascinator.glitch.me/api/goods', {
     method: 'GET',
     callback(err, goods) {
-      if (err) {
-        console.error(err);
-        return;
-      }
+      if (err) return;
       const allRow = goods.map(createRow);
       elem.append(...allRow);
       calculateTotalPrice(goods);

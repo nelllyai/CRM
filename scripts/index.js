@@ -5,20 +5,22 @@ import renderGoods from './modules/render.js';
 const init = () => {
   const {
     list,
-    closeButton,
+    closeButtonsGroup,
     form,
     discountCheckbox,
     discountInput,
-    overlay,
+    overlaysGroup,
     addButton,
   } = getElements();
 
+  const [overlayForm, overlayError] = overlaysGroup;
+
   renderGoods(list);
   listControl(list);
-  formControl(form, overlay, list);
-  overlayControl(overlay, closeButton);
+  formControl(form, overlayForm, overlayError, list);
+  overlayControl(overlaysGroup, closeButtonsGroup);
   discountCheckboxControl(discountCheckbox, discountInput);
-  addButtonControl(addButton, overlay);
+  addButtonControl(addButton, overlayForm);
 };
 
 init();

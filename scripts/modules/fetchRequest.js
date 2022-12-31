@@ -20,7 +20,7 @@ const fetchRequest = async (url, {
       return;
     }
 
-    throw new Error(response.status);
+    throw new Error(`Ошибка ${response.status} ${response.statusText}`);
   } catch (err) {
     callback(err);
   }
