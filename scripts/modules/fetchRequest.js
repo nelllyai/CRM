@@ -1,8 +1,9 @@
 const fetchRequest = async (url, {
   method = 'GET',
   callback,
+  args,
   body,
-  headers
+  headers,
 }) => {
   try {
     const options = {
@@ -16,7 +17,7 @@ const fetchRequest = async (url, {
 
     if (response.ok) {
       const data = await response.json();
-      if (callback) callback(null, data);
+      if (callback) callback(null, data, ...args);
       return;
     }
 
@@ -25,3 +26,5 @@ const fetchRequest = async (url, {
     callback(err);
   }
 };
+
+export default fetchRequest;

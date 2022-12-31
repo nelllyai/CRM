@@ -1,30 +1,31 @@
-const createRow = obj => {
+const createRow = ({ id, title, category, units, count, price, image, discount }) => {
   const tr = document.createElement('tr');
   tr.classList.add('cms__tr');
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (key === 'img') {
-      tr.dataset.pic = value;
-    } else if (key !== 'description') {
-      const td = document.createElement('td');
-      td.classList.add('cms__td');
-      if (key === 'cost') {
-        td.textContent = '$' + value;
-      } else {
-        td.textContent = value;
-      }
-      tr.append(td);
-    }
-  }
+  const arr = [id, title, category, units, count];
+
+  if (image) tr.dataset.pic = image;
+
+  arr.forEach(item => {
+    const td = document.createElement('td');
+    td.classList.add('cms__td');
+    td.textContent = item;
+    tr.append(td);
+  });
+
+  const priceTd = document.createElement('td');
+  priceTd.classList.add('cms__td');
+  priceTd.textContent = '$' + price;
+  tr.append(priceTd);
 
   const totalTd = document.createElement('td');
   totalTd.classList.add('cms__td');
-  totalTd.textContent = '$' + obj.cost * obj.quantity;
+  totalTd.textContent = '$' + price * count;
   tr.append(totalTd);
 
   tr.insertAdjacentHTML(
-      'beforeend',
-      `
+    'beforeend',
+    `
       <td class="cms__td cms__td_img cms__td_small-padding">
         <button class="table-button">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
