@@ -116,6 +116,7 @@ const init = goods => {
     addButton,
   } = getElements();
 
+  // const goods = получение с сервера
   renderGoods(list, goods);
   listControl(list, goods);
   formControl(form, overlay, list, goods);
