@@ -1,7 +1,6 @@
 const fetchRequest = async (url, {
   method = 'GET',
   callback,
-  args,
   body,
   headers,
 }) => {
@@ -17,7 +16,7 @@ const fetchRequest = async (url, {
 
     if (response.ok) {
       const data = await response.json();
-      if (callback) callback(null, data, ...args);
+      if (callback) callback(null, data);
       return;
     }
 

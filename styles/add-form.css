@@ -10,7 +10,7 @@
   border-radius: 8px;
 }
 
-.add-form__field_product {
+.add-form__field_title {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 }
@@ -35,12 +35,12 @@
   grid-row: 1 / 3;
 }
 
-.add-form__field_quantity {
+.add-form__field_count {
   grid-column: 2 / 3;
   grid-row: 3 / 4;
 }
 
-.add-form__field_cost {
+.add-form__field_price {
   grid-column: 2 / 3;
   grid-row: 4 / 5;
 }

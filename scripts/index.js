@@ -1,7 +1,6 @@
 import getElements from './modules/getElements.js';
 import {formControl, listControl, discountCheckboxControl, addButtonControl, overlayControl} from './modules/control.js';
 import renderGoods from './modules/render.js';
-import getGoods from './modules/data.js';
 
 const init = () => {
   const {
@@ -14,10 +13,9 @@ const init = () => {
     addButton,
   } = getElements();
 
-  getGoods(list);
-  // renderGoods(list, goods);
-  // listControl(list, goods);
-  // formControl(form, overlay, list, goods);
+  renderGoods(list);
+  listControl(list);
+  formControl(form, overlay, list);
   overlayControl(overlay, closeButton);
   discountCheckboxControl(discountCheckbox, discountInput);
   addButtonControl(addButton, overlay);
