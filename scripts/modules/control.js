@@ -3,6 +3,19 @@ import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
 import { showModal, showError } from './modal.js';
 
+const updateRow = (id, data) => {
+  const row = document.querySelector(`[data-id="${id}"]`);
+  const {title, category, units, count, price} = data;
+  const tds = row.querySelectorAll('.cms__td');
+  
+  tds[1].textContent = title;
+  tds[2].textContent = category;
+  tds[3].textContent = units;
+  tds[4].textContent = count;
+  tds[5].textContent = '$' + price;
+  tds[6].textContent = '$' + count * price;
+};
+
 const getTotalPrice = () => {
   fetchRequest('https://shorthaired-veiled-fascinator.glitch.me/api/goods', {
     method: 'GET',
@@ -13,7 +26,15 @@ const getTotalPrice = () => {
   });
 };
 
-export const formControl = (form, overlay, list) => {
+export const formControl = (form, overlay) => {
+  form.addEventListener('change', () => {
+    const totalPrice = overlay.querySelector('.total__price');
+    const total = +form.count.value * +form.price.value;
+    totalPrice.textContent = '$\xA0' + total.toFixed(2);
+  });
+};
+
+export const addFormControl = (form, overlay, list) => {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -37,11 +58,31 @@ export const formControl = (form, overlay, list) => {
       },
     });
   });
+};
 
-  form.addEventListener('change', () => {
-    const totalPrice = overlay.querySelector('.total__price');
-    const total = +form.count.value * +form.price.value;
-    totalPrice.textContent = '$\xA0' + total.toFixed(2);
+export const editFormControl = (form, overlay, id) => {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${id}`, {
+      method: 'PATCH',
+      body: Object.fromEntries(formData),
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      callback(err, product) {
+        if (err) {
+          showError(err);
+          return;
+        }
+        form.reset();
+        overlay.remove();
+        updateRow(product.id, product);
+        getTotalPrice();
+      },
+    });
   });
 };
 

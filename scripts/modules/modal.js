@@ -1,4 +1,4 @@
-import { discountCheckboxControl, formControl, overlayControl } from './control.js';
+import { addFormControl, discountCheckboxControl, editFormControl, formControl, overlayControl } from './control.js';
 import loadStyles from './loadStyles.js';
 
 export const showError = async message => {
@@ -46,9 +46,21 @@ export const showModal = async (err, data, list) => {
   const close = document.createElement('button');
   close.className = 'overlay__close-button';
 
+  const headerWrapper = document.createElement('div');
+  headerWrapper.className = 'form-article__header';
+
   const header = document.createElement('h2');
   header.classList.add('title', 'form-aritcle__title');
   header.textContent = data ? 'Изменить товар' : 'Добавить товар';
+
+  headerWrapper.append(header);
+
+  if (data) {
+    const idWrapper = document.createElement('div');
+    idWrapper.className = 'form-article__id';
+    idWrapper.textContent = `ID: ${data.id}`;
+    headerWrapper.append(idWrapper);
+  }
 
   const hr = document.createElement('hr');
 
@@ -106,7 +118,7 @@ export const showModal = async (err, data, list) => {
       <div class="total">
         Итоговая стоимость: <span class="total__price">$&nbsp;${(data ? data.count * data.price : 0).toFixed(2)}</span>
       </div>
-      <button class="button" type="submit">Добавить товар</button>
+      <button class="button" type="submit">${data ? 'Изменить товар' : 'Добавить товар'}</button>
     </div>
   `;
 
@@ -114,10 +126,13 @@ export const showModal = async (err, data, list) => {
   const discountInput = form.querySelector('.checkbox > .add-form__input');
 
   overlay.append(formWrapper);
-  formWrapper.append(close, header, hr, form);
+  formWrapper.append(close, headerWrapper, hr, form);
 
   document.body.append(overlay);
   overlayControl(overlay, close);
-  formControl(form, overlay, list);
+  formControl(form, overlay);
   discountCheckboxControl(discountCheckbox, discountInput);
+
+  if (!data) addFormControl(form, overlay, list);
+  else editFormControl(form, overlay, data.id);
 };
