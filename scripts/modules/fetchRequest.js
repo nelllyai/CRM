@@ -6,7 +6,7 @@ const fetchRequest = async (url, {
 }) => {
   try {
     const options = {
-      method
+      method,
     };
 
     if (body) options.body = JSON.stringify(body);

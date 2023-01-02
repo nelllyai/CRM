@@ -1,13 +1,13 @@
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
-import { showModal, showError } from './modal.js';
+import {showModal, showError} from './modal.js';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
   const {title, category, units, count, price} = data;
   const tds = row.querySelectorAll('.cms__td');
-  
+
   tds[1].textContent = title;
   tds[2].textContent = category;
   tds[3].textContent = units;
@@ -22,7 +22,7 @@ const getTotalPrice = () => {
     callback(err, goods) {
       if (err) return;
       calculateTotalPrice(goods);
-    }
+    },
   });
 };
 
@@ -44,7 +44,7 @@ export const addFormControl = (form, overlay, list) => {
       method: 'POST',
       body: Object.fromEntries(formData),
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json;charset=utf-8',
       },
       callback(err, product) {
         if (err) {
@@ -70,7 +70,7 @@ export const editFormControl = (form, overlay, id) => {
       method: 'PATCH',
       body: Object.fromEntries(formData),
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json;charset=utf-8',
       },
       callback(err, product) {
         if (err) {
@@ -98,20 +98,21 @@ export const listControl = list => {
         callback(err) {
           if (err) return;
           getTotalPrice();
-        }
+        },
       });
       row.remove();
     } else if (target.closest('.table-button_image') && row.dataset.pic) {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
-      const popup = open('about:blank', '', `width=600,height=600,top=${y},left=${x}`);
+      const popup = open('about:blank', '',
+          `width=600,height=600,top=${y},left=${x}`);
       popup.document.body.innerHTML = `<img src="https://shorthaired-veiled-fascinator.glitch.me/${row.dataset.pic}">`;
     } else if (target.closest('.table-button_edit')) {
       fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
         method: 'GET',
         callback(err, product) {
           showModal(err, product, list);
-        }
+        },
       });
     }
   });
@@ -134,7 +135,7 @@ export const addButtonControl = (addButton, list) => {
 };
 
 export const overlayControl = (overlay, closeButton) => {
-  overlay.addEventListener('click', ({ target }) => {
+  overlay.addEventListener('click', ({target}) => {
     if (target === overlay || target === closeButton) {
       overlay.remove();
     }

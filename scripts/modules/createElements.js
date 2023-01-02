@@ -1,4 +1,5 @@
-const createRow = ({ id, title, category, units, count, price, image, discount }) => {
+const createRow = ({id, title, category, units,
+  count, price, image, discount}) => {
   const tr = document.createElement('tr');
   tr.classList.add('cms__tr');
   tr.dataset.id = id;
@@ -25,8 +26,8 @@ const createRow = ({ id, title, category, units, count, price, image, discount }
   tr.append(totalTd);
 
   tr.insertAdjacentHTML(
-    'beforeend',
-    `
+      'beforeend',
+      `
       <td class="cms__td cms__td_small-padding">
         <button class="table-button table-button_image">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

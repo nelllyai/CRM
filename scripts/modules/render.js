@@ -10,7 +10,7 @@ const renderGoods = elem => {
       const allRow = goods.map(createRow);
       elem.append(...allRow);
       calculateTotalPrice(goods);
-    }
+    },
   });
 };
 

@@ -1,4 +1,5 @@
-import { addFormControl, discountCheckboxControl, editFormControl, formControl, overlayControl } from './control.js';
+import {addFormControl, discountCheckboxControl,
+  editFormControl, formControl, overlayControl} from './control.js';
 import loadStyles from './loadStyles.js';
 
 export const showError = async message => {
