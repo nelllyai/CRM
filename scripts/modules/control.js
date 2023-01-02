@@ -1,10 +1,7 @@
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
-
-const closeOverlay = overlay => {
-  overlay.classList.remove('overlay_show');
-};
+import { showModal, showError } from './modal.js';
 
 const getTotalPrice = () => {
   fetchRequest('https://shorthaired-veiled-fascinator.glitch.me/api/goods', {
@@ -16,7 +13,7 @@ const getTotalPrice = () => {
   });
 };
 
-export const formControl = (form, overlay, error, list) => {
+export const formControl = (form, overlay, list) => {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -30,17 +27,11 @@ export const formControl = (form, overlay, error, list) => {
       },
       callback(err, product) {
         if (err) {
-          error.classList.add('overlay_show');
-          
-          if (err.toString().includes('Ошибка')) {
-            const errorText = error.querySelector('.error__text');
-            errorText.textContent = err;
-          }
-
+          showError(err);
           return;
         }
         form.reset();
-        closeOverlay(overlay);
+        overlay.remove();
         list.append(createRow(product));
         getTotalPrice();
       },
@@ -58,9 +49,9 @@ export const listControl = list => {
   list.addEventListener('click', event => {
     const target = event.target;
     const row = target.closest('tr');
+    const currentId = row.dataset.id;
 
     if (target.closest('.table-button_delete')) {
-      const currentId = row.querySelector('td').textContent;
       fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
         method: 'DELETE',
         callback(err) {
@@ -69,11 +60,18 @@ export const listControl = list => {
         }
       });
       row.remove();
-    } else if (target.closest('.cms__td_img') && row.dataset.pic) {
+    } else if (target.closest('.table-button_image') && row.dataset.pic) {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
       const popup = open('about:blank', '', `width=600,height=600,top=${y},left=${x}`);
       popup.document.body.innerHTML = `<img src="https://shorthaired-veiled-fascinator.glitch.me/${row.dataset.pic}">`;
+    } else if (target.closest('.table-button_edit')) {
+      fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
+        method: 'GET',
+        callback(err, product) {
+          showModal(err, product, list);
+        }
+      });
     }
   });
 };
@@ -88,18 +86,16 @@ export const discountCheckboxControl = (discountCheckbox, discountInput) => {
   });
 };
 
-export const addButtonControl = (addButton, overlay) => {
+export const addButtonControl = (addButton, list) => {
   addButton.addEventListener('click', () => {
-    overlay.classList.add('overlay_show');
+    showModal(null, null, list);
   });
 };
 
-export const overlayControl = (overlays, closeButton) => {
-  for (let i = 0; i < overlays.length; i++) {
-    overlays[i].addEventListener('click', ({ target }) => {
-      if (target === overlays[i] || target === closeButton[i]) {
-        closeOverlay(overlays[i]);
-      }
-    });
-  }
+export const overlayControl = (overlay, closeButton) => {
+  overlay.addEventListener('click', ({ target }) => {
+    if (target === overlay || target === closeButton) {
+      overlay.remove();
+    }
+  });
 };

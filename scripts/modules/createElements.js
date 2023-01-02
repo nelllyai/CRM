@@ -1,6 +1,7 @@
 const createRow = ({ id, title, category, units, count, price, image, discount }) => {
   const tr = document.createElement('tr');
   tr.classList.add('cms__tr');
+  tr.dataset.id = id;
 
   const arr = [id, title, category, units, count];
 
@@ -26,8 +27,8 @@ const createRow = ({ id, title, category, units, count, price, image, discount }
   tr.insertAdjacentHTML(
     'beforeend',
     `
-      <td class="cms__td cms__td_img cms__td_small-padding">
-        <button class="table-button">
+      <td class="cms__td cms__td_small-padding">
+        <button class="table-button table-button_image">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M17.7778 2.22223H2.22223C1.92754 2.22223 1.64493 2.33929 1.43655 2.54767C1.22818 2.75604 1.11111 3.03866 1.11111 3.33334V16.6667C1.11111 16.9614 1.22818 17.244 1.43655 17.4523C1.64493 17.6607 1.92754 17.7778 2.22223 17.7778H17.7778C18.0725 17.7778 18.3551 17.6607 18.5635 17.4523C18.7718 17.244 18.8889 16.9614 18.8889 16.6667V3.33334C18.8889 3.03866 18.7718 2.75604 18.5635 2.54767C18.3551 2.33929 18.0725 2.22223 17.7778 2.22223ZM2.22223 16.6667V3.33334H17.7778V16.6667H2.22223Z" fill="#6E6893"/>
@@ -38,7 +39,7 @@ const createRow = ({ id, title, category, units, count, price, image, discount }
         </button>
       </td>
       <td class="cms__td cms__td_small-padding">
-        <button class="table-button">
+        <button class="table-button table-button_edit">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_2015_14)">
               <path
