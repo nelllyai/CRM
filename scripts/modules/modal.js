@@ -1,5 +1,7 @@
-import {addFormControl, discountCheckboxControl,
-  editFormControl, formControl, overlayControl} from './control.js';
+import {
+  addFormControl, discountCheckboxControl,
+  editFormControl, fileControl, formControl, overlayControl
+} from './control.js';
 import loadStyles from './loadStyles.js';
 
 export const showError = async message => {
@@ -109,9 +111,13 @@ export const showModal = async (err, data, list) => {
         <input class="add-form__input" type="number" name="price" id="price" ${data ? `value="${data.price}"` : ''} required>
       </div>
 
-      <div class="add-form__field add-form__field_img">
-        <label class="add-form__button-label button button_small" for="img">Добавить изображение</label>
-        <input class="add-form__file" type="file" name="img" accept=".jpg, .jpeg, .png" id="img">
+      <div class="add-form__field add-form__field_image">
+        <p class="add-form__error">Изображение не должно превышать размер 1 Мб</p>
+        <div class="add-form__image">
+          <label class="add-form__button-label button button_small" for="image">Добавить изображение</label>
+          <input class="add-form__file" type="file" name="image" accept=".jpg, .jpeg, .png" id="image">
+        </div>
+        <img class="add-form__preview" ${data && data.image ? `src="https://shorthaired-veiled-fascinator.glitch.me/${data.image}"` : ''}>
       </div>
     </fieldset>
 
@@ -124,7 +130,11 @@ export const showModal = async (err, data, list) => {
   `;
 
   const discountCheckbox = form.querySelector('.add-form__checkbox');
-  const discountInput = form.querySelector('.checkbox > .add-form__input');
+  const discountInput = form.discount;
+
+  const fileInput = form.image;
+  const imagePreview = form.querySelector('.add-form__preview');
+  const imageError = form.querySelector('.add-form__error');
 
   overlay.append(formWrapper);
   formWrapper.append(close, headerWrapper, hr, form);
@@ -133,6 +143,7 @@ export const showModal = async (err, data, list) => {
   overlayControl(overlay, close);
   formControl(form, overlay);
   discountCheckboxControl(discountCheckbox, discountInput);
+  fileControl(fileInput, imagePreview, imageError);
 
   if (!data) addFormControl(form, overlay, list);
   else editFormControl(form, overlay, data.id);

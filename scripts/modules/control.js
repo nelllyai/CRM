@@ -1,11 +1,11 @@
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
-import {showModal, showError} from './modal.js';
+import { showModal, showError } from './modal.js';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
-  const {title, category, units, count, price} = data;
+  const { title, category, units, count, price } = data;
   const tds = row.querySelectorAll('.cms__td');
 
   tds[1].textContent = title;
@@ -105,7 +105,7 @@ export const listControl = list => {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
       const popup = open('about:blank', '',
-          `width=600,height=600,top=${y},left=${x}`);
+        `width=600,height=600,top=${y},left=${x}`);
       popup.document.body.innerHTML = `<img src="https://shorthaired-veiled-fascinator.glitch.me/${row.dataset.pic}">`;
     } else if (target.closest('.table-button_edit')) {
       fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
@@ -135,9 +135,29 @@ export const addButtonControl = (addButton, list) => {
 };
 
 export const overlayControl = (overlay, closeButton) => {
-  overlay.addEventListener('click', ({target}) => {
+  overlay.addEventListener('click', ({ target }) => {
     if (target === overlay || target === closeButton) {
       overlay.remove();
+    }
+  });
+};
+
+export const fileControl = (fileInput, preview, err) => {
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const src = URL.createObjectURL(file);
+
+      const sizeInMegabytes = file.size / 2 ** 20;
+      if (sizeInMegabytes > 1) {
+        err.style.visibility = 'visible';
+        preview.removeAttribute('src');
+        fileInput.value = '';
+      } else {
+        err.style.visibility = 'hidden';
+        preview.src = src;
+        preview.style.display = 'block';
+      }
     }
   });
 };

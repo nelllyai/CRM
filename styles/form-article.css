@@ -36,4 +36,14 @@
   .form-article__header {
     flex-direction: column;
   }
+
+  .form-article__title {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 590px) {
+  .form-article {
+    padding: 20px 50px;
+  }
 }
