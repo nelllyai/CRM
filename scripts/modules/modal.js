@@ -92,23 +92,23 @@ export const showModal = async (err, data, list) => {
         <label class="add-form__label" for="discount">Дисконт</label>
         <div class="checkbox">
           <input class="add-form__checkbox" type="checkbox" ${data && data.discount ? 'checked' : ''}>
-          <input class="add-form__input" type="number" name="discount" id="discount" ${data && data.discount ? `value="${data.discount}"` : ''} ${data && data.discount ? '' : 'disabled'}>
+          <input class="add-form__input" type="text" name="discount" id="discount" ${data && data.discount ? `value="${data.discount}"` : ''} ${data && data.discount ? '' : 'disabled'}>
         </div>
       </div>
 
       <div class="add-form__field add-form__field_description">
         <label class="add-form__label" for="description">Описание</label>
-        <textarea class="add-form__textarea" name="description" id="description" required>${data ? data.description : ''}</textarea>
+        <textarea class="add-form__textarea" name="description" id="description" minlength="80" required>${data ? data.description : ''}</textarea>
       </div>
 
       <div class="add-form__field add-form__field_count">
         <label class="add-form__label" for="count">Количество</label>
-        <input class="add-form__input" type="number" name="count" id="count" ${data ? `value="${data.count}"` : ''} required>
+        <input class="add-form__input" type="text" name="count" id="count" ${data ? `value="${data.count}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_price">
         <label class="add-form__label" for="price">Цена</label>
-        <input class="add-form__input" type="number" name="price" id="price" ${data ? `value="${data.price}"` : ''} required>
+        <input class="add-form__input" type="text" name="price" id="price" ${data ? `value="${data.price}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_image">

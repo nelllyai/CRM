@@ -27,6 +27,16 @@ const getTotalPrice = () => {
 };
 
 export const formControl = (form, overlay) => {
+  form.addEventListener('input', ({target}) => {
+    if (target === form.discount || target === form.count || target === form.price) {
+      target.value = target.value.replace(/\D/, '');
+    } else if (target === form.units) {
+      target.value = target.value.replace(/[^а-я]/i, '');
+    } else {
+      target.value = target.value.replace(/[^а-я\s]/i, '');
+    }
+  });
+
   form.addEventListener('change', () => {
     const totalPrice = overlay.querySelector('.total__price');
     const total = +form.count.value * +form.price.value;
