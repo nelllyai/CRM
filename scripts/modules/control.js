@@ -106,14 +106,6 @@ export const listControl = list => {
 
     if (target.closest('.table-button_delete')) {
       showConfirmation(currentId, row);
-      // fetchRequest(`https://shorthaired-veiled-fascinator.glitch.me/api/goods/${currentId}`, {
-      //   method: 'DELETE',
-      //   callback(err) {
-      //     if (err) return;
-      //     getTotalPrice();
-      //   },
-      // });
-      // row.remove();
     } else if (target.closest('.table-button_image') && row.dataset.pic) {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
