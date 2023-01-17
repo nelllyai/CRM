@@ -179,14 +179,18 @@ export const confirmationControl = (modal, id, row) => {
   modal.addEventListener('click', ({ target }) => {
     if (target.tagName === 'BUTTON') {
       if (target.classList.contains('button-agree')) {
-        fetchRequest(`${url}/api/goods/${id}`, {
+        fetchRequest(`${url}/api/goods/12312`, {
           method: 'DELETE',
           callback(err) {
-            if (err) return;
+            if (err) {
+              showError(err);
+              return;
+            }
+
             getTotalPrice();
+            row.remove();
           },
         });
-        row.remove();
       }
       modal.remove();
     }
