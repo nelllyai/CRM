@@ -1,4 +1,4 @@
-.error {
+.message {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -9,7 +9,7 @@
   background-color: var(--background);
 }
 
-.error__content {
+.message__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,24 +17,40 @@
   gap: 33px;
 }
 
-.error__text {
+.message__text {
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   letter-spacing: 0.1em;
+  text-align: center;
   text-transform: uppercase;
 }
 
+.message__buttons-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 40px;
+}
+
 @media (max-width: 480px) {
-  .error__content {
+  .message__content {
     padding: 70px 35px 65px;
+    gap: 20px;
+  }
+
+  .message__buttons-group {
     gap: 20px;
   }
 }
 
 @media (max-width: 380px) {
-  .error__content {
+  .message__content {
     padding: 60px 20px 30px;
     gap: 15px;
+  }
+
+  .message__buttons-group {
+    gap: 10px;
   }
 }

@@ -1,25 +1,25 @@
 import {
-  addFormControl, discountCheckboxControl,
+  addFormControl, confirmationControl, discountCheckboxControl,
   editFormControl, fileControl, formControl, overlayControl
 } from './control.js';
 import loadStyles from './loadStyles.js';
 
 export const showError = async message => {
   await loadStyles('styles/overlay.css');
-  await loadStyles('styles/error.css');
+  await loadStyles('styles/message.css');
 
   const error = document.createElement('div');
   error.className = 'overlay';
 
   error.innerHTML = `
-      <div class="error">
+    <div class="message">
       <button class="overlay__close-button overlay__close-button_small"></button>
-      <div class="error__content">
+      <div class="message__content">
         <svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 2L92 92" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
           <path d="M2 92L92 2" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
         </svg>
-        <p class="error__text">${message.toString().includes('Ошибка') ? message : 'Что-то пошло не так'}</p>
+        <p class="message__text">${message.toString().includes('Ошибка') ? message : 'Что-то пошло не так'}</p>
       </div>
     </div>
   `;
@@ -147,4 +147,31 @@ export const showModal = async (err, data, list) => {
 
   if (!data) addFormControl(form, overlay, list);
   else editFormControl(form, overlay, data.id);
+};
+
+export const showConfirmation = async (id, row) => {
+  await loadStyles('styles/overlay.css');
+  await loadStyles('styles/message.css');
+
+  const confirmation = document.createElement('div');
+  confirmation.className = 'overlay';
+
+  confirmation.innerHTML = `
+    <div class="message">
+      <button class="overlay__close-button overlay__close-button_small"></button>
+      <div class="message__content">
+        <p class="message__text">Вы действительно хотите удалить товар под ID: ${id}?</p>
+        <div class="message__buttons-group">
+          <button class="button button-agree">Да</button>
+          <button class="button">Нет</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const close = confirmation.querySelector('.overlay__close-button');
+
+  document.body.append(confirmation);
+  overlayControl(confirmation, close);
+  confirmationControl(confirmation, id, row);
 };
