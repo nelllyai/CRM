@@ -96,11 +96,16 @@
 
 .cms__th {
   padding: 15px;
+  min-width: 85px;
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-align: left;
+}
+
+.cms__th_no-title {
+  min-width: 0;
 }
 
 .cms__td {
