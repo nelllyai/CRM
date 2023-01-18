@@ -7,15 +7,7 @@ import { renderFilteredGoods } from './render.js';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
-  const {title, category, units, count, price} = data;
-  const tds = row.querySelectorAll('.cms__td');
-
-  tds[1].textContent = title;
-  tds[2].textContent = category;
-  tds[3].textContent = units;
-  tds[4].textContent = count;
-  tds[5].textContent = '$' + price;
-  tds[6].textContent = '$' + count * price;
+  row.replaceWith(createRow(data));
 };
 
 const getTotalPrice = () => {
@@ -53,8 +45,6 @@ export const formControl = (form, overlay, method, list, id) => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     data.image = await toBase64(data.image);
-
-    console.log(data);
 
     fetchRequest(`/api/goods${id ? '/' + id : ''}`, {
       method,
