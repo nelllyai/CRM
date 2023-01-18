@@ -3,7 +3,7 @@ import {
   fileControl, formControl, overlayControl,
 } from './control.js';
 import loadStyles from './loadStyles.js';
-import { renderCategories } from './render.js';
+import {renderCategories} from './render.js';
 
 const url = 'https://shorthaired-veiled-fascinator.glitch.me';
 
@@ -179,12 +179,9 @@ export const showModal = async (err, data, list) => {
   discountCheckboxControl(discountCheckbox, discountInput);
   fileControl(fileInput, imagePreview, imageError);
   renderCategories(datalistCategories);
-  
+
   if (!data) formControl(form, overlay, 'POST', list);
   else formControl(form, overlay, 'PATCH', null, data.id);
-  // formControl(form, overlay);
-  // if (!data) (form, overlay, );
-  // else editFormControl(form, overlay, data.id);
 };
 
 export const showConfirmation = async (id, row) => {

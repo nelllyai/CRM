@@ -1,4 +1,4 @@
-import createRow, { createOption } from './createElements.js';
+import createRow, {createOption} from './createElements.js';
 import calculateTotalPrice from './calculate.js';
 import fetchRequest from './fetchRequest.js';
 
