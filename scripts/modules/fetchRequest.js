@@ -1,3 +1,5 @@
+export const address = 'https://shorthaired-veiled-fascinator.glitch.me';
+
 const fetchRequest = async (url, {
   method = 'GET',
   callback,
@@ -12,7 +14,7 @@ const fetchRequest = async (url, {
     if (body) options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
 
-    const response = await fetch(url, options);
+    const response = await fetch(`${address}${url}`, options);
 
     if (response.ok) {
       const data = await response.json();

@@ -2,10 +2,8 @@ import createRow, {createOption} from './createElements.js';
 import calculateTotalPrice from './calculate.js';
 import fetchRequest from './fetchRequest.js';
 
-const url = 'https://shorthaired-veiled-fascinator.glitch.me';
-
 const renderGoods = elem => {
-  fetchRequest(`${url}/api/goods`, {
+  fetchRequest(`/api/goods`, {
     method: 'GET',
     callback(err, goods) {
       if (err) return;
@@ -17,7 +15,7 @@ const renderGoods = elem => {
 };
 
 export const renderCategories = datalist => {
-  fetchRequest(`${url}/api/category`, {
+  fetchRequest(`/api/category`, {
     method: 'GET',
     callback(err, list) {
       if (err) return;

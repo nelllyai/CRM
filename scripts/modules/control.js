@@ -1,9 +1,7 @@
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
-import fetchRequest from './fetchRequest.js';
+import fetchRequest, { address } from './fetchRequest.js';
 import {showModal, showError, showConfirmation} from './modal.js';
-
-const url = 'https://shorthaired-veiled-fascinator.glitch.me';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
@@ -19,7 +17,7 @@ const updateRow = (id, data) => {
 };
 
 const getTotalPrice = () => {
-  fetchRequest(`${url}/api/goods`, {
+  fetchRequest(`/api/goods`, {
     method: 'GET',
     callback(err, goods) {
       if (err) return;
@@ -50,7 +48,7 @@ export const formControl = (form, overlay, method, list, id) => {
 
     const formData = new FormData(event.target);
 
-    fetchRequest(`${url}/api/goods${id ? '/' + id : ''}`, {
+    fetchRequest(`/api/goods${id ? '/' + id : ''}`, {
       method,
       body: Object.fromEntries(formData),
       headers: {
@@ -87,9 +85,9 @@ export const listControl = list => {
       const y = screen.height / 2 - 300;
       const popup = open('about:blank', '',
           `width=600,height=600,top=${y},left=${x}`);
-      popup.document.body.innerHTML = `<img src="${url}/${row.dataset.pic}">`;
+      popup.document.body.innerHTML = `<img src="${address}/${row.dataset.pic}">`;
     } else if (target.closest('.table-button_edit')) {
-      fetchRequest(`${url}/api/goods/${currentId}`, {
+      fetchRequest(`/api/goods/${currentId}`, {
         method: 'GET',
         callback(err, product) {
           showModal(err, product, list);
@@ -147,7 +145,7 @@ export const confirmationControl = (modal, id, row) => {
   modal.addEventListener('click', ({target}) => {
     if (target.tagName === 'BUTTON') {
       if (target.classList.contains('button-agree')) {
-        fetchRequest(`${url}/api/goods/${id}`, {
+        fetchRequest(`/api/goods/${id}`, {
           method: 'DELETE',
           callback(err) {
             if (err) {

@@ -4,8 +4,7 @@ import {
 } from './control.js';
 import loadStyles from './loadStyles.js';
 import {renderCategories} from './render.js';
-
-const url = 'https://shorthaired-veiled-fascinator.glitch.me';
+import { address } from './fetchRequest.js';
 
 export const showError = async message => {
   await loadStyles('styles/overlay.css');
@@ -148,7 +147,7 @@ export const showModal = async (err, data, list) => {
             name="image" accept=".jpg, .jpeg, .png" id="image">
         </div>
         <img class="add-form__preview"
-          ${data && data.image ? `src="${url}/${data.image}"` : ''}>
+          ${data && data.image ? `src="${address}/${data.image}"` : ''}>
       </div>
     </fieldset>
 
