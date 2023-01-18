@@ -73,4 +73,10 @@ const createRow = ({id, title, category, units,
   return tr;
 };
 
+export const createOption = category => {
+  const option = document.createElement('option');
+  option.value = category;
+  return option;
+};
+
 export default createRow;

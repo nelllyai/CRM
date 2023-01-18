@@ -3,6 +3,7 @@ import {
   editFormControl, fileControl, formControl, overlayControl,
 } from './control.js';
 import loadStyles from './loadStyles.js';
+import { renderCategories } from './render.js';
 
 const url = 'https://shorthaired-veiled-fascinator.glitch.me';
 
@@ -83,18 +84,23 @@ export const showModal = async (err, data, list) => {
       <div class="add-form__field add-form__field_title">
         <label class="add-form__label" for="title">Наименование</label>
         <input class="add-form__input" type="text" name="title" id="title"
+          autocomplete="off"
           ${data ? `value="${data.title}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_category">
         <label class="add-form__label" for="category">Категория</label>
-        <input class="add-form__input" type="text" name="category" id="category"
+        <input class="add-form__input" type="text"
+          name="category" id="category" list="categories"
+          autocomplete="off"
           ${data ? `value="${data.category}"` : ''} required>
+        <datalist id="categories"></datalist>
       </div>
 
       <div class="add-form__field add-form__field_units">
         <label class="add-form__label" for="units">Единицы измерения</label>
         <input class="add-form__input" type="text" name="units" id="units"
+          autocomplete="off"
           ${data ? `value="${data.units}"` : ''} required>
       </div>
 
@@ -104,7 +110,7 @@ export const showModal = async (err, data, list) => {
           <input class="add-form__checkbox" type="checkbox"
             ${data && data.discount ? 'checked' : ''}>
           <input class="add-form__input" type="text"
-            name="discount" id="discount"
+            name="discount" id="discount" autocomplete="off"
             ${data && data.discount ?
               `value="${data.discount}"` : ''}
             ${data && data.discount ? '' : 'disabled'}>
@@ -119,13 +125,15 @@ export const showModal = async (err, data, list) => {
 
       <div class="add-form__field add-form__field_count">
         <label class="add-form__label" for="count">Количество</label>
-        <input class="add-form__input" type="text" name="count" id="count"
+        <input class="add-form__input" type="text"
+          name="count" id="count" autocomplete="off"
           ${data ? `value="${data.count}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_price">
         <label class="add-form__label" for="price">Цена</label>
-        <input class="add-form__input" type="text" name="price" id="price"
+        <input class="add-form__input" type="text"
+          name="price" id="price" autocomplete="off"
           ${data ? `value="${data.price}"` : ''} required>
       </div>
 
@@ -161,6 +169,7 @@ export const showModal = async (err, data, list) => {
   const fileInput = form.image;
   const imagePreview = form.querySelector('.add-form__preview');
   const imageError = form.querySelector('.add-form__error');
+  const datalistCategories = form.querySelector('datalist');
 
   overlay.append(formWrapper);
   formWrapper.append(close, headerWrapper, hr, form);
@@ -170,6 +179,7 @@ export const showModal = async (err, data, list) => {
   formControl(form, overlay);
   discountCheckboxControl(discountCheckbox, discountInput);
   fileControl(fileInput, imagePreview, imageError);
+  renderCategories(datalistCategories);
 
   if (!data) addFormControl(form, overlay, list);
   else editFormControl(form, overlay, data.id);
