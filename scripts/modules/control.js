@@ -1,13 +1,13 @@
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest from './fetchRequest.js';
-import { showModal, showError, showConfirmation } from './modal.js';
+import {showModal, showError, showConfirmation} from './modal.js';
 
 const url = 'https://shorthaired-veiled-fascinator.glitch.me';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
-  const { title, category, units, count, price } = data;
+  const {title, category, units, count, price} = data;
   const tds = row.querySelectorAll('.cms__td');
 
   tds[1].textContent = title;
@@ -29,7 +29,7 @@ const getTotalPrice = () => {
 };
 
 export const formControl = (form, overlay) => {
-  form.addEventListener('input', ({ target }) => {
+  form.addEventListener('input', ({target}) => {
     if (target === form.discount || target === form.count || target === form.price) {
       target.value = target.value.replace(/\D/, '');
     } else if (target === form.units) {
@@ -110,7 +110,7 @@ export const listControl = list => {
       const x = screen.width / 2 - 300;
       const y = screen.height / 2 - 300;
       const popup = open('about:blank', '',
-        `width=600,height=600,top=${y},left=${x}`);
+          `width=600,height=600,top=${y},left=${x}`);
       popup.document.body.innerHTML = `<img src="${url}/${row.dataset.pic}">`;
     } else if (target.closest('.table-button_edit')) {
       fetchRequest(`${url}/api/goods/${currentId}`, {
@@ -140,7 +140,7 @@ export const addButtonControl = (addButton, list) => {
 };
 
 export const overlayControl = (overlay, closeButton) => {
-  overlay.addEventListener('click', ({ target }) => {
+  overlay.addEventListener('click', ({target}) => {
     if (target === overlay || target === closeButton) {
       overlay.remove();
     }
@@ -168,7 +168,7 @@ export const fileControl = (fileInput, preview, err) => {
 };
 
 export const confirmationControl = (modal, id, row) => {
-  modal.addEventListener('click', ({ target }) => {
+  modal.addEventListener('click', ({target}) => {
     if (target.tagName === 'BUTTON') {
       if (target.classList.contains('button-agree')) {
         fetchRequest(`${url}/api/goods/12312`, {

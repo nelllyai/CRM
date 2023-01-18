@@ -1,8 +1,10 @@
 import {
   addFormControl, confirmationControl, discountCheckboxControl,
-  editFormControl, fileControl, formControl, overlayControl
+  editFormControl, fileControl, formControl, overlayControl,
 } from './control.js';
 import loadStyles from './loadStyles.js';
+
+const url = 'https://shorthaired-veiled-fascinator.glitch.me';
 
 export const showError = async message => {
   await loadStyles('styles/overlay.css');
@@ -13,13 +15,20 @@ export const showError = async message => {
 
   error.innerHTML = `
     <div class="message">
-      <button class="overlay__close-button overlay__close-button_small"></button>
+      <button class="overlay__close-button
+        overlay__close-button_small"></button>
       <div class="message__content">
-        <svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 2L92 92" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
-          <path d="M2 92L92 2" stroke="#D80101" stroke-width="3" stroke-linecap="round" />
+        <svg width="94" height="94" viewBox="0 0 94 94"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L92 92" stroke="#D80101"
+            stroke-width="3" stroke-linecap="round" />
+          <path d="M2 92L92 2" stroke="#D80101"
+            stroke-width="3" stroke-linecap="round" />
         </svg>
-        <p class="message__text">${message.toString().includes('Ошибка') ? message : 'Что-то пошло не так'}</p>
+        <p class="message__text">
+          ${message.toString().includes('Ошибка') ?
+            message : 'Что-то пошло не так'}
+        </p>
       </div>
     </div>
   `;
@@ -68,64 +77,81 @@ export const showModal = async (err, data, list) => {
   const hr = document.createElement('hr');
 
   const form = document.createElement('form');
-  form.action = 'https://jsonplaceholder.typicode.com/posts';
-  form.method = 'post';
 
   form.innerHTML = `
       <fieldset class="add-form__fieldset">
       <div class="add-form__field add-form__field_title">
         <label class="add-form__label" for="title">Наименование</label>
-        <input class="add-form__input" type="text" name="title" id="title" ${data ? `value="${data.title}"` : ''} required>
+        <input class="add-form__input" type="text" name="title" id="title"
+          ${data ? `value="${data.title}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_category">
         <label class="add-form__label" for="category">Категория</label>
-        <input class="add-form__input" type="text" name="category" id="category" ${data ? `value="${data.category}"` : ''} required>
+        <input class="add-form__input" type="text" name="category" id="category"
+          ${data ? `value="${data.category}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_units">
         <label class="add-form__label" for="units">Единицы измерения</label>
-        <input class="add-form__input" type="text" name="units" id="units" ${data ? `value="${data.units}"` : ''} required>
+        <input class="add-form__input" type="text" name="units" id="units"
+          ${data ? `value="${data.units}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_discount">
         <label class="add-form__label" for="discount">Дисконт</label>
         <div class="checkbox">
-          <input class="add-form__checkbox" type="checkbox" ${data && data.discount ? 'checked' : ''}>
-          <input class="add-form__input" type="text" name="discount" id="discount" ${data && data.discount ? `value="${data.discount}"` : ''} ${data && data.discount ? '' : 'disabled'}>
+          <input class="add-form__checkbox" type="checkbox"
+            ${data && data.discount ? 'checked' : ''}>
+          <input class="add-form__input" type="text"
+            name="discount" id="discount"
+            ${data && data.discount ?
+              `value="${data.discount}"` : ''}
+            ${data && data.discount ? '' : 'disabled'}>
         </div>
       </div>
 
       <div class="add-form__field add-form__field_description">
         <label class="add-form__label" for="description">Описание</label>
-        <textarea class="add-form__textarea" name="description" id="description" minlength="80" required>${data ? data.description : ''}</textarea>
+        <textarea class="add-form__textarea" name="description" id="description"
+          minlength="80" required>${data ? data.description : ''}</textarea>
       </div>
 
       <div class="add-form__field add-form__field_count">
         <label class="add-form__label" for="count">Количество</label>
-        <input class="add-form__input" type="text" name="count" id="count" ${data ? `value="${data.count}"` : ''} required>
+        <input class="add-form__input" type="text" name="count" id="count"
+          ${data ? `value="${data.count}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_price">
         <label class="add-form__label" for="price">Цена</label>
-        <input class="add-form__input" type="text" name="price" id="price" ${data ? `value="${data.price}"` : ''} required>
+        <input class="add-form__input" type="text" name="price" id="price"
+          ${data ? `value="${data.price}"` : ''} required>
       </div>
 
       <div class="add-form__field add-form__field_image">
-        <p class="add-form__error">Изображение не должно превышать размер 1 Мб</p>
+        <p class="add-form__error">
+          Изображение не должно превышать размер 1 Мб
+        </p>
         <div class="add-form__image">
-          <label class="add-form__button-label button button_small" for="image">Добавить изображение</label>
-          <input class="add-form__file" type="file" name="image" accept=".jpg, .jpeg, .png" id="image">
+          <label class="add-form__button-label
+            button button_small" for="image">Добавить изображение</label>
+          <input class="add-form__file" type="file"
+            name="image" accept=".jpg, .jpeg, .png" id="image">
         </div>
-        <img class="add-form__preview" ${data && data.image ? `src="https://shorthaired-veiled-fascinator.glitch.me/${data.image}"` : ''}>
+        <img class="add-form__preview"
+          ${data && data.image ? `src="${url}/${data.image}"` : ''}>
       </div>
     </fieldset>
 
     <div class="add-form__final">
       <div class="total">
-        Итоговая стоимость: <span class="total__price">$&nbsp;${(data ? data.count * data.price : 0).toFixed(2)}</span>
+        Итоговая стоимость: <span class="total__price">$&nbsp;
+          ${(data ? data.count * data.price : 0).toFixed(2)}</span>
       </div>
-      <button class="button" type="submit">${data ? 'Изменить товар' : 'Добавить товар'}</button>
+      <button class="button" type="submit">
+        ${data ? 'Изменить товар' : 'Добавить товар'}
+      </button>
     </div>
   `;
 
@@ -158,9 +184,12 @@ export const showConfirmation = async (id, row) => {
 
   confirmation.innerHTML = `
     <div class="message">
-      <button class="overlay__close-button overlay__close-button_small"></button>
+      <button class="overlay__close-button
+        overlay__close-button_small"></button>
       <div class="message__content">
-        <p class="message__text">Вы действительно хотите удалить товар под ID: ${id}?</p>
+        <p class="message__text">
+          Вы действительно хотите удалить товар под ID: ${id}?
+        </p>
         <div class="message__buttons-group">
           <button class="button button-agree">Да</button>
           <button class="button">Нет</button>
