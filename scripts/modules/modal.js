@@ -1,6 +1,6 @@
 import {
-  addFormControl, confirmationControl, discountCheckboxControl,
-  editFormControl, fileControl, formControl, overlayControl,
+  confirmationControl, discountCheckboxControl,
+  fileControl, formControl, overlayControl,
 } from './control.js';
 import loadStyles from './loadStyles.js';
 import { renderCategories } from './render.js';
@@ -176,13 +176,15 @@ export const showModal = async (err, data, list) => {
 
   document.body.append(overlay);
   overlayControl(overlay, close);
-  formControl(form, overlay);
   discountCheckboxControl(discountCheckbox, discountInput);
   fileControl(fileInput, imagePreview, imageError);
   renderCategories(datalistCategories);
-
-  if (!data) addFormControl(form, overlay, list);
-  else editFormControl(form, overlay, data.id);
+  
+  if (!data) formControl(form, overlay, 'POST', list);
+  else formControl(form, overlay, 'PATCH', null, data.id);
+  // formControl(form, overlay);
+  // if (!data) (form, overlay, );
+  // else editFormControl(form, overlay, data.id);
 };
 
 export const showConfirmation = async (id, row) => {
