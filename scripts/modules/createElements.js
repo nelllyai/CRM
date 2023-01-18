@@ -1,5 +1,9 @@
-const createRow = ({id, title, category, units,
-  count, price, image, discount}) => {
+import {calculateWithDiscount, twoNumbersAfterPoint} from './calculate.js';
+
+const createRow = product => {
+  const {id, title, category, units,
+    count, image} = product;
+
   const tr = document.createElement('tr');
   tr.classList.add('cms__tr');
   tr.dataset.id = id;
@@ -17,12 +21,14 @@ const createRow = ({id, title, category, units,
 
   const priceTd = document.createElement('td');
   priceTd.classList.add('cms__td');
-  priceTd.textContent = '$' + price;
+  priceTd.textContent = '$' +
+    twoNumbersAfterPoint(calculateWithDiscount(product));
   tr.append(priceTd);
 
   const totalTd = document.createElement('td');
   totalTd.classList.add('cms__td');
-  totalTd.textContent = '$' + price * count;
+  totalTd.textContent = '$' +
+    twoNumbersAfterPoint(calculateWithDiscount(product) * count);
   tr.append(totalTd);
 
   const imageIcon = hasImage ?

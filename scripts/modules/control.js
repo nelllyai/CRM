@@ -3,7 +3,7 @@ import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest, {address} from './fetchRequest.js';
 import {showModal, showError, showConfirmation} from './modal.js';
-import { renderFilteredGoods } from './render.js';
+import {renderFilteredGoods} from './render.js';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
@@ -35,7 +35,11 @@ export const formControl = (form, overlay, method, list, id) => {
 
   form.addEventListener('change', () => {
     const totalPrice = overlay.querySelector('.total__price');
-    const total = +form.count.value * +form.price.value;
+    let total = +form.price.value;
+    if (form.discount.value) {
+      total -= +form.price.value * form.discount.value / 100;
+    }
+    total *= +form.count.value;
     totalPrice.textContent = '$\xA0' + total.toFixed(2);
   });
 

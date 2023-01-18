@@ -22,7 +22,7 @@ export const renderFilteredGoods = (elem, text) => {
     callback(err, goods) {
       if (err) return;
       const filteredGoods = goods.filter(product =>
-          product.title.toLowerCase().startsWith(text.toLowerCase()) ||
+        product.title.toLowerCase().startsWith(text.toLowerCase()) ||
           product.category.toLowerCase().startsWith(text.toLowerCase()));
       const allRow = filteredGoods.map(createRow);
       elem.append(...allRow);

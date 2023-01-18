@@ -1,12 +1,13 @@
 import getElements from './modules/getElements.js';
-import {listControl, addButtonControl, searchControl} from './modules/control.js';
+import
+{listControl, addButtonControl, searchControl} from './modules/control.js';
 import renderGoods from './modules/render.js';
 
 const init = () => {
   const {
     list,
     addButton,
-    search
+    search,
   } = getElements();
 
   renderGoods(list);

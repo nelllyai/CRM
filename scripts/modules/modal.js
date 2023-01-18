@@ -5,6 +5,7 @@ import {
 import loadStyles from './loadStyles.js';
 import {renderCategories} from './render.js';
 import {address} from './fetchRequest.js';
+import {calculateWithDiscount} from './calculate.js';
 
 export const showError = async message => {
   await loadStyles('styles/overlay.css');
@@ -154,8 +155,9 @@ export const showModal = async (err, data, list) => {
 
     <div class="add-form__final">
       <div class="total">
-        Итоговая стоимость: <span class="total__price">$&nbsp;
-          ${(data ? data.count * data.price : 0).toFixed(2)}</span>
+        Итоговая стоимость:
+        <span class="total__price">$&nbsp;${(data ?
+          data.count * calculateWithDiscount(data) : 0).toFixed(2)}</span>
       </div>
       <button class="button" type="submit">
         ${data ? 'Изменить товар' : 'Добавить товар'}
