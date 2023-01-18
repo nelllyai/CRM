@@ -3,6 +3,7 @@ import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
 import fetchRequest, {address} from './fetchRequest.js';
 import {showModal, showError, showConfirmation} from './modal.js';
+import { renderFilteredGoods } from './render.js';
 
 const updateRow = (id, data) => {
   const row = document.querySelector(`[data-id="${id}"]`);
@@ -171,5 +172,17 @@ export const confirmationControl = (modal, id, row) => {
       }
       modal.remove();
     }
+  });
+};
+
+export const searchControl = (search, list) => {
+  search.addEventListener('input', event => {
+    const text = event.target.value;
+
+    setTimeout(() => {
+      if (text === event.target.value) {
+        renderFilteredGoods(list, text);
+      }
+    }, 300);
   });
 };

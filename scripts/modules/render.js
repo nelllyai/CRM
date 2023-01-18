@@ -14,6 +14,22 @@ const renderGoods = elem => {
   });
 };
 
+export const renderFilteredGoods = (elem, text) => {
+  elem.innerHTML = '';
+
+  fetchRequest(`/api/goods`, {
+    method: 'GET',
+    callback(err, goods) {
+      if (err) return;
+      const filteredGoods = goods.filter(product =>
+          product.title.toLowerCase().startsWith(text.toLowerCase()) ||
+          product.category.toLowerCase().startsWith(text.toLowerCase()));
+      const allRow = filteredGoods.map(createRow);
+      elem.append(...allRow);
+    },
+  });
+};
+
 export const renderCategories = datalist => {
   fetchRequest(`/api/category`, {
     method: 'GET',
