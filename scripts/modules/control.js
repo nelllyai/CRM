@@ -96,7 +96,7 @@ export const listControl = list => {
       const popup = open('about:blank', '',
           `width=600,height=600,top=${y},left=${x}`);
       popup.document.body.innerHTML =
-        `<img src="${address}/${row.dataset.pic}">`;
+        `<img src="${address}/${row.dataset.pic}" style="max-width: 600px;">`;
     } else if (target.closest('.table-button_edit')) {
       fetchRequest(`/api/goods/${currentId}`, {
         method: 'GET',
