@@ -1,6 +1,7 @@
+import toBase64 from './base64.js';
 import calculateTotalPrice from './calculate.js';
 import createRow from './createElements.js';
-import fetchRequest, { address } from './fetchRequest.js';
+import fetchRequest, {address} from './fetchRequest.js';
 import {showModal, showError, showConfirmation} from './modal.js';
 
 const updateRow = (id, data) => {
@@ -28,11 +29,13 @@ const getTotalPrice = () => {
 
 export const formControl = (form, overlay, method, list, id) => {
   form.addEventListener('input', ({target}) => {
-    if (target === form.discount || target === form.count || target === form.price) {
+    if (target === form.discount || target === form.count ||
+      target === form.price) {
       target.value = target.value.replace(/\D/, '');
     } else if (target === form.units) {
       target.value = target.value.replace(/[^а-я]/i, '');
-    } else {
+    } else if (target === form.title ||
+      target === form.caregory || target === form.description) {
       target.value = target.value.replace(/[^а-я\s]/i, '');
     }
   });
@@ -43,14 +46,18 @@ export const formControl = (form, overlay, method, list, id) => {
     totalPrice.textContent = '$\xA0' + total.toFixed(2);
   });
 
-  form.addEventListener('submit', event => {
+  form.addEventListener('submit', async event => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    data.image = await toBase64(data.image);
+
+    console.log(data);
 
     fetchRequest(`/api/goods${id ? '/' + id : ''}`, {
       method,
-      body: Object.fromEntries(formData),
+      body: data,
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
@@ -59,13 +66,16 @@ export const formControl = (form, overlay, method, list, id) => {
           showError(err);
           return;
         }
+
         form.reset();
         overlay.remove();
+
         if (list) {
           list.append(createRow(product));
         } else if (id) {
           updateRow(product.id, product);
         }
+
         getTotalPrice();
       },
     });
@@ -85,7 +95,8 @@ export const listControl = list => {
       const y = screen.height / 2 - 300;
       const popup = open('about:blank', '',
           `width=600,height=600,top=${y},left=${x}`);
-      popup.document.body.innerHTML = `<img src="${address}/${row.dataset.pic}">`;
+      popup.document.body.innerHTML =
+        `<img src="${address}/${row.dataset.pic}">`;
     } else if (target.closest('.table-button_edit')) {
       fetchRequest(`/api/goods/${currentId}`, {
         method: 'GET',
