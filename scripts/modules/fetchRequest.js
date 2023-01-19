@@ -24,7 +24,13 @@ const fetchRequest = async (url, {
 
     throw new Error(`Ошибка ${response.status} ${response.statusText}`);
   } catch (err) {
-    callback(err);
+    console.log(err);
+    if (err.message.includes('404') ||
+      err.message.includes('422') || err.message.includes('500')) {
+      callback(err.message);
+      return;
+    }
+    callback(`Что-то пошло не так...`);
   }
 };
 

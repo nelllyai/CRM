@@ -8,6 +8,8 @@ import {address} from './fetchRequest.js';
 import {calculateWithDiscount} from './calculate.js';
 
 export const showError = async message => {
+  console.log(message);
+
   await loadStyles('styles/overlay.css');
   await loadStyles('styles/message.css');
 
@@ -27,8 +29,7 @@ export const showError = async message => {
             stroke-width="3" stroke-linecap="round" />
         </svg>
         <p class="message__text">
-          ${message.toString().includes('Ошибка') ?
-            message : 'Что-то пошло не так'}
+          ${message}
         </p>
       </div>
     </div>
