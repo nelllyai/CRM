@@ -27,8 +27,7 @@ export const formControl = (form, overlay, method, list, id) => {
       target.value = target.value.replace(/\D/, '');
     } else if (target === form.units) {
       target.value = target.value.replace(/[^а-я]/i, '');
-    } else if (target === form.title ||
-      target === form.caregory || target === form.description) {
+    } else if (target === form.title || target === form.caregory) {
       target.value = target.value.replace(/[^а-я\s]/i, '');
     }
   });
