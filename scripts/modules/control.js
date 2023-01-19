@@ -48,6 +48,7 @@ export const formControl = (form, overlay, method, list, id) => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     data.image = await toBase64(data.image);
+    if (data.image === 'data:') delete data.image;
 
     fetchRequest(`/api/goods${id ? '/' + id : ''}`, {
       method,
